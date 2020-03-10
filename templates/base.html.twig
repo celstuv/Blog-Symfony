@@ -11,6 +11,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
         <!-- Material Design Bootstrap -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.14.0/css/mdb.min.css" rel="stylesheet">
+        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
@@ -30,9 +31,6 @@
                 <li class="nav-item">
                 <a class="nav-link" href="{{ path('blog') }}">Articles</a>
                 </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="{{ path('blog_create') }}">Créer un Article</a>
-                </li>
                 {% if not app.user %}
                 <li class="nav-item">
                   <a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
@@ -44,11 +42,14 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{{ path('security_logout') }}">Déconnexion</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ path('blog_create') }}">Créer un Article</a>
+                  </li>
                 </ul>
                 <ul class="navbar-nav ml-auto nav-flex-icons">
                 <li class="nav-item avatar">
                   <a class="nav-link p-0" href="#">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-5.jpg" class="rounded-circle z-depth-0"
+                    <img src="{{asset("uploads/pictures/")}}{{app.user.picture}}" class="rounded-circle z-depth-0"
                       alt="avatar image" height="35">
                   </a>
                 </li>
@@ -59,7 +60,11 @@
       <div class="container">
         {% block body %}{% endblock %}
       </div>
-
+      <script>
+      tinymce.init({
+      selector: '.tinymce'
+      });
+      </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
