@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <article>
+    <h2>{{ article.title }}</h2>
+      <div class="metadata">
+        <p>Ecrit le {{ article.createdAt |date('d/m/Y') }} à {{ article.createdAt |date('H:i') }} dans la catégorie {{ article.category.title }}</p>
+      </div>
+      <div class="content">
+        <img src="{{ article.image }}">
+        <p>{{ article.content | raw }}</p>
+      </div>
+  </article>
+  <section id="commentaire">
+    <h2>{{ article.comments |length}} commentaires : </h2>
+    {% for comment in article.comments %}
+      <div class="comment">
+        <div class="row">
+          <div class="col-4">
+          {{ comment.author}} (<small>{{ comment.createdAt | date('d/m/Y')}}</small>)
+          </div>
+          <div class="col">
+          {{ comment.content | raw }}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+
+    {# ici se trouve le formulaire afin de créer un nouvel article#}
+
+    {% if app.user %}
+    {{ form_start(commentForm) }}
+      {{ form_row(commentForm.author, {'attr': {'placeholder': "Votre nom"}}) }}
+      {{ form_row(commentForm.Content, {'attr': {'placeholder': "Votre commentaire"}}) }}
+      <button type="submit" class="btn btn-success">Commenter</button>
+    {{ form_end(commentForm) }}
+    {% else %}
+      <h3>Voue ne pouvez pas commenter, si vous n'êtes pas connecter<h3>
+      <a href="{{ path('security_login') }}" class="btn btn-primary">Connexion</a>
+    {% endif %}
+
+  </section>
+
+{% endblock %}
