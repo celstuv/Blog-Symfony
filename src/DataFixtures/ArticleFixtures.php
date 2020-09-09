@@ -18,7 +18,7 @@ class ArticleFixtures extends Fixture
 
       // Création de 3 catégories fakées
       // Pour chaque catégorie, je définis son titre et son contenu
-      // Pour chaque catérogie, je créée un article
+      // Pour chaque catégorie, je créée un article
       // Pour chaque article, je donne  un nom et son contenu et un commentaire
 
       for ($i=1; $i <=3 ; $i++) {

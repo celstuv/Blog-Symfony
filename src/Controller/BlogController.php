@@ -87,7 +87,7 @@ class BlogController extends AbstractController
 
           $comment->setCreatedAt(new \DateTime())
                   ->setArticle($article);
-          //Alos je fais appel à un manager pour exécuter ma requête
+          //Alors je fais appel à un manager pour exécuter ma requête
           $manager = $this->getDoctrine()->getManager();
           $manager->persist($comment);
           $manager->flush();
